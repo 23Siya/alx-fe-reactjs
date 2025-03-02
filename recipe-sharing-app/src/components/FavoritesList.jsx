@@ -23,4 +23,4 @@ const FavoritesList = () => {
     </div>
   );
 };
-export defualt FavoritesList;
+export default FavoritesList;
