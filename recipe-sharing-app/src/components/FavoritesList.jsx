@@ -23,3 +23,4 @@ const FavoritesList = () => {
     </div>
   );
 };
+export defualt FavoritesList;
