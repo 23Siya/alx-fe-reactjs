@@ -17,10 +17,11 @@ const EditRecipeForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+ 
+
+   const handleSubmit = (e) => {
     e.preventDefault();
-    updateRecipe({ id, ...formData });
-    navigate(`/recipe/${id}`);
+   updateRecipe({ id, ...formData });
   };
 
   return (
