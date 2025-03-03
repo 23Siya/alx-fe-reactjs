@@ -1,14 +1,13 @@
-// EditRecipeForm.js
 import React, { useState } from 'react';
-import { useRecipeStore } from './recipeStore';
+import { useRecipeStore } from '../store/recipeStore';
 
 const EditRecipeForm = ({ recipe }) => {
   const [title, setTitle] = useState(recipe.title);
   const [description, setDescription] = useState(recipe.description);
-  const updateRecipe = useRecipeStore(state => state.updateRecipe);
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault(); // ✅ Prevents page reload
     updateRecipe({ ...recipe, title, description });
   };
 
@@ -16,7 +15,7 @@ const EditRecipeForm = ({ recipe }) => {
     <form onSubmit={handleSubmit}>
       <h2>Edit Recipe</h2>
       <div>
-        <label>Title</label>
+        <label>Title:</label>
         <input
           type="text"
           value={title}
@@ -24,7 +23,7 @@ const EditRecipeForm = ({ recipe }) => {
         />
       </div>
       <div>
-        <label>Description</label>
+        <label>Description:</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
