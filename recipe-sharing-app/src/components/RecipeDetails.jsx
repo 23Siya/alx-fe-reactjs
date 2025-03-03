@@ -1,25 +1,37 @@
- // RecipeDetails component
- import { useRecipeStore } from './recipeStore';
- import EditRecipeForm from './Components/EditRecipeForm.jsx';
- import DeleteRecipeButton from './Components/DeleteRecipeButton.jsx';
+import React, { useState } from 'react';
+import { useRecipeStore } from '../store/recipeStore';
 
- const RecipeDetails = ({ recipeId }) => {
-   const recipe = useRecipeStore(state =>
-     state.recipes.find(recipe => recipe.id === recipeId)
-   );
+const EditRecipeForm = ({ recipe }) => {
+  const [title, setTitle] = useState(recipe.title);
+  const [description, setDescription] = useState(recipe.description);
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
-   return (
-     <div>
-       <h1>{recipe.title}</h1>
-       <p>{recipe.description}</p>
-       <Router>
-      <Routes>
-        <Route path="/" element={<RecipeList />} />
-        <Route path="/recipe/:id" element={<RecipeDetails />} />
-        <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
-      </Routes>
-    </Router>
-     </div>
-   );
- };
- export default RecipeDetails;
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevents page reload
+    updateRecipe({ ...recipe, title, description });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2>Edit Recipe</h2>
+      <div>
+        <label>Title:</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+      <button type="submit">Save Changes</button>
+    </form>
+  );
+};
+
+export default EditRecipeForm;
