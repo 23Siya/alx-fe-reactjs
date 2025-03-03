@@ -1,37 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRecipeStore } from '../store/recipeStore';
+import { useParams } from 'react-router-dom';
+import EditRecipeForm from './EditRecipeForm';
+import DeleteRecipeButton from './DeleteRecipeButton';
 
-const EditRecipeForm = ({ recipe }) => {
-  const [title, setTitle] = useState(recipe.title);
-  const [description, setDescription] = useState(recipe.description);
-  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
+const RecipeDetails = () => {
+  const { id } = useParams();
+  const recipe = useRecipeStore((state) =>
+    state.recipes.find((recipe) => recipe.id === parseInt(id)) // Ensure ID is an integer
+  );
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevents page reload
-    updateRecipe({ ...recipe, title, description });
-  };
+  if (!recipe) {
+    return <p>Recipe not found.</p>; // Handle missing recipe gracefully
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Edit Recipe</h2>
-      <div>
-        <label>Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Description:</label>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <button type="submit">Save Changes</button>
-    </form>
+    <div>
+      <h1>{recipe.title}</h1>
+      <p>{recipe.description}</p>
+      <EditRecipeForm recipe={recipe} />
+      <DeleteRecipeButton recipeId={recipe.id} />
+    </div>
   );
 };
 
-export default EditRecipeForm;
+export default RecipeDetails;
