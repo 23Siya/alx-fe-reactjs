@@ -8,8 +8,10 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<RecipeList />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="/edit/:id" element={<EditRecipeForm />} />
+        <Route path="/add" element={<AddRecipeForm />} />
       </Routes>
     </Router>
   );
