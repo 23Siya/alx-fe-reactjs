@@ -9,7 +9,7 @@ const RegistrationForm = () => {
 
   const [errors, setErrors] = useState({});
 
-  const { username, email, password } = formData; // Extract values for clarity
+  const { username, email, password } = formData;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,9 +18,11 @@ const RegistrationForm = () => {
 
   const validateForm = () => {
     let newErrors = {};
-    if (!username.trim()) newErrors.username = "Username is required";
-    if (!email.trim()) newErrors.email = "Email is required";
-    if (!password.trim()) newErrors.password = "Password is required";
+    
+    if (!username) newErrors.username = "Username is required";
+    if (!email) newErrors.email = "Email is required";
+    if (!password) newErrors.password = "Password is required";
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -40,7 +42,7 @@ const RegistrationForm = () => {
         <input
           type="text"
           name="username"
-          value={username} // Explicitly referencing extracted variable
+          value={username}
           onChange={handleChange}
         />
         {errors.username && <p className="error">{errors.username}</p>}
@@ -51,7 +53,7 @@ const RegistrationForm = () => {
         <input
           type="email"
           name="email"
-          value={email} // Explicitly referencing extracted variable
+          value={email}
           onChange={handleChange}
         />
         {errors.email && <p className="error">{errors.email}</p>}
@@ -62,7 +64,7 @@ const RegistrationForm = () => {
         <input
           type="password"
           name="password"
-          value={password} // Explicitly referencing extracted variable
+          value={password}
           onChange={handleChange}
         />
         {errors.password && <p className="error">{errors.password}</p>}
