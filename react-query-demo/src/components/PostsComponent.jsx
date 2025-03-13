@@ -13,6 +13,9 @@ function PostsComponent() {
     queryKey: ["posts"],
     queryFn: fetchPosts,
     staleTime: 30000, // Cache data for 30 seconds
+    cacheTime: 60000, // Keep cached data for 60 seconds even after unmount
+    refetchOnWindowFocus: false, // Prevent refetching when the window gains focus
+    keepPreviousData: true, // Keep previous data while fetching new data
   });
 
   if (isLoading) return <p>Loading posts...</p>;
