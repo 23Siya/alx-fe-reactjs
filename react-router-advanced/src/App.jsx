@@ -6,7 +6,7 @@ import Profile from "./components/Profile";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileSettings from "./components/ProfileSettings";
 import BlogPost from "./components/BlogPost";
-import ProtectedRoute from "./components/ProtectedRoute"; // ✅ Import ProtectedRoute
+import ProtectedRoute from "./components/ProtectedRoute"; //  Import ProtectedRoute
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        {/* ✅ Protected Profile Route (Ensuring /profile exists) */}
+        {/*  Protected Profile Route (Ensuring /profile exists) */}
         <Route
           path="/profile"
           element={
@@ -27,7 +27,7 @@ function App() {
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
 
-        {/* ✅ Dynamic Blog Route */}
+        {/* Dynamic Blog Route */}
         <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
