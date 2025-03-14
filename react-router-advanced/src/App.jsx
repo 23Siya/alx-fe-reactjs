@@ -9,16 +9,18 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
-    <Router>
-      <Routes>        
-        {/* Protected Route for Profile */}
+   <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        {/* Protected Profile Route */}
         <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
 
-        {/* Dynamic route for blog post with 'id' parameter */}
-        <Route path="blog/:id" element={<BlogPost />} />
+        {/*  Dynamic Route for Blog Post */}
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
   );
