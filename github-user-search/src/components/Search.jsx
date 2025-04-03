@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { fetchUsers } from "../services/githubService";
+import { fetchUsers } from "../services/githubService"; // ✅ Correct function name
 
 const Search = () => {
   const [username, setUsername] = useState("");
   const [location, setLocation] = useState("");
-  const [repos, setRepos] = useState("");
+  const [minRepos, setMinRepos] = useState("");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -16,8 +16,8 @@ const Search = () => {
     setUsers([]);
 
     try {
-      const data = await fetchUsers(username, location, repos);
-      setUsers(data.items); // API returns users in "items" array
+      const data = await fetchUsers(username, location, minRepos); // ✅ Correct function call
+      setUsers(data.items);
     } catch (err) {
       setError("No users found. Try different search criteria.");
     } finally {
@@ -46,8 +46,8 @@ const Search = () => {
         <input
           type="number"
           placeholder="Min Repositories"
-          value={repos}
-          onChange={(e) => setRepos(e.target.value)}
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
           className="p-2 border rounded"
         />
         <button
@@ -74,7 +74,6 @@ const Search = () => {
                 />
                 <div>
                   <h3 className="text-lg font-medium">{user.login}</h3>
-                  <p className="text-sm text-gray-600">Location: {user.location || "N/A"}</p>
                   <a
                     href={user.html_url}
                     target="_blank"
